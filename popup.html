@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LogoMute</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <section class="main-control" aria-label="Main monitor control">
+    <button id="monitor-toggle" type="button" class="monitor-toggle state-off" disabled>START</button>
+    <div id="monitor-action-description" class="monitor-action-description" role="status" aria-live="polite">Checking logo calibration…</div>
+  </section>
+
+  <header>
+    <div class="mark" aria-hidden="true">LM</div>
+    <div><h1>LogoMute <small>v0.10.8</small></h1><p>Keep the news. Mute the ads.</p></div>
+  </header>
+
+  <div class="statusline">
+    <span>Logo: <strong id="profile-status" class="logo-save-state logo-save-no">NOT SAVED</strong></span>
+    <span>Monitor: <strong id="monitor-status">Off</strong></span>
+  </div>
+  <div class="statusline"><span>Full-screen: <strong id="fullscreen-profile-status" class="logo-save-state logo-save-no">NOT SAVED</strong></span></div>
+  <div id="message" class="message" role="status" aria-live="polite">Checking this tab…</div>
+
+  <div class="buttons">
+    <button id="select" class="outline">1. Select preview logo</button>
+    <button id="arm-fullscreen" type="button" class="outline">2. Capture full-screen logo · 8 sec</button>
+  </div>
+
+  <div id="capture-guidance" class="capture-guidance" hidden tabindex="-1" role="status" aria-live="polite">
+    <strong>Full-screen capture armed · 8-second audible countdown</strong>
+    <span>1. The popup closes. Click the TV player’s full-screen button within 2 minutes.</span>
+    <span>2. Move the pointer away so playback controls can fade.</span>
+    <span>3. Listen to 8 beeps (8 → 1). The screenshot is taken when the countdown ends.</span>
+  </div>
+
+  <a id="watch-link" class="watch-link" href="https://usnewson.com/watch/" target="_blank" rel="noopener noreferrer">Watch channels ↗</a>
+  <a id="help-link" class="help-link" href="help.html" target="_blank" rel="noopener noreferrer">? Help &amp; Instructions — Start Here</a>
+
+
+  <details class="settings">
+    <summary>Settings <span class="chevron" aria-hidden="true">⌄</span></summary>
+    <div class="setting-body">
+      <label for="sensitivity">Sensitivity for this channel</label>
+      <select id="sensitivity">
+        <option value="0.75">Tolerant</option>
+        <option value="1">Balanced</option>
+        <option value="1.25">Strict</option>
+      </select>
+      <label for="delay">Mute after logo absent</label>
+      <select id="delay">
+        <option value="1000">1 second</option>
+        <option value="1700">1.7 seconds</option>
+        <option value="3000">3 seconds</option>
+      </select>
+      <label class="debug-toggle" for="debugMuteOnLostLogo">
+        <input type="checkbox" id="debugMuteOnLostLogo">
+        <span><strong>Debug: mute if logo tracking is lost</strong><small>Red icon means lost position OR a commercial. Turn off for normal viewing.</small></span>
+      </label>
+      <div class="confidence">Match: <span id="match-status">—</span></div>
+      <div class="confidence">Stage: <span id="stage-status">—</span></div>
+      <div class="confidence">Detected logo: <span id="logo-state-status">—</span></div>
+      <div class="confidence">Last image: <span id="frame-status">—</span></div>
+      <button type="button" id="test-mute" class="outline">Test tab mute (2 seconds)</button>
+      <button type="button" id="test-chime" class="outline">Test confirmation chime</button>
+      <button type="button" id="copy-diagnostic" class="outline">Copy diagnostics</button>
+      <div class="directory-settings">
+        <strong>Channel directory shortcut</strong>
+        <label for="directory-label">Link label</label>
+        <input type="text" id="directory-label" maxlength="70" value="Watch channels" placeholder="Watch channels">
+        <label for="directory-url">Website URL</label>
+        <input type="url" id="directory-url" maxlength="1000" value="https://usnewson.com/watch/" placeholder="https://example.com/watch/" spellcheck="false">
+        <button type="button" id="save-directory" class="outline">Save channel link</button>
+      </div>
+    </div>
+  </details>
+  
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

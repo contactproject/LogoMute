@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LogoMute — Full-screen logo calibration</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif}
+    *{box-sizing:border-box} body{margin:0;background:#0c1827;color:#eaf2fc}
+    header{padding:12px 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #304860}
+    h1{font-size:16px;margin:0 0 4px} p{font-size:12px;color:#b9cce0;margin:0}
+    .actions{display:flex;align-items:center;gap:8px}
+    button{font:600 13px system-ui;border:0;border-radius:7px;padding:10px 13px;cursor:pointer;background:#2e4b67;color:white}
+    button.primary{background:#19825a}button:disabled{opacity:.45;cursor:not-allowed}
+    #stage-area{padding:14px;display:flex;justify-content:center;align-items:flex-start;overflow:auto;height:calc(100vh - 113px)}
+    #stage{position:relative;display:inline-block;line-height:0;max-width:100%;user-select:none}
+    #picture{display:block;max-width:100%;max-height:calc(100vh - 145px);width:auto;height:auto;pointer-events:none}
+    #surface{position:absolute;inset:0;cursor:crosshair;touch-action:none;outline:1px solid #48627d;user-select:none;-webkit-user-select:none}
+    #box{position:absolute;display:none;border:2px solid #45ffa8;background:rgba(50,231,153,.14);box-shadow:0 0 0 1px #001a1a;pointer-events:none}
+    #first-marker{position:absolute;width:14px;height:14px;border:2px solid #ffe878;border-radius:50%;transform:translate(-50%,-50%);display:none;pointer-events:none;box-shadow:0 0 0 2px #112233}
+    #manual-panel{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 18px;background:#16263a;border-top:1px solid #304860}
+    #manual-panel label{font-size:12px;color:#d3e4f3;display:flex;align-items:center;gap:5px}
+    #manual-panel select,#manual-panel input{font:600 13px system-ui;background:#223c56;color:white;border:1px solid #647c94;border-radius:5px;padding:6px}
+    #manual-panel input{width:64px;min-width:0}
+    #manual-panel button{padding:8px 11px;background:#315d80}
+    #manual-panel .manual-hint{font-size:11px;color:#b9cce0}
+    #manual-panel .manual-title{font-size:12px;font-weight:700}
+    #stage-area{height:calc(100vh - 220px)}
+    #picture{max-height:calc(100vh - 253px)}
+    footer{padding:8px 18px;font-size:12px;color:#bed4eb;min-height:36px;border-top:1px solid #304860}
+    .error{color:#ff9f9f}
+  </style>
+</head>
+<body>
+<header>
+  <div><h1>LogoMute · Full-screen logo</h1><p>Select the logo with a small margin (the box may be larger), or use the controls below.</p></div>
+  <div class="actions">
+    <button id="reset">Reselect</button>
+    <button id="cancel">Cancel</button>
+    <button class="primary" id="save" disabled>Save full-screen logo</button>
+  </div>
+</header>
+<div id="stage-area"><div id="stage"><img id="picture" alt="Captured full-screen TV frame"><div id="surface" title="Click two opposite corners, or drag"><div id="box"></div><div id="first-marker"></div></div></div></div>
+<section id="manual-panel" aria-label="Logo selection without mouse drawing">
+  <span class="manual-title">Alternative: position a box</span>
+  <label>Corner <select id="preset"><option value="bottom-left">Bottom-left</option><option value="bottom-right">Bottom-right</option><option value="top-left">Top-left</option><option value="top-right">Top-right</option></select></label>
+  <button id="use-preset" type="button">Place box</button>
+  <label>X % <input id="crop-x" type="number" min="0" max="99" step="0.5" value="5"></label>
+  <label>Y % <input id="crop-y" type="number" min="0" max="99" step="0.5" value="79"></label>
+  <label>W % <input id="crop-w" type="number" min="0.5" max="100" step="0.5" value="12"></label>
+  <label>H % <input id="crop-h" type="number" min="0.5" max="100" step="0.5" value="16"></label>
+  <button id="apply-coordinates" type="button">Update box</button>
+  <span class="manual-hint">All controls stay outside the captured TV picture.</span>
+</section>
+<footer id="status" role="status" aria-live="polite">Loading captured frame…</footer>
+<script src="calibrate.js"></script>
+</body>
+</html>

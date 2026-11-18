@@ -1,0 +1,22 @@
+LogoMute v0.10.5 — Desktop Google Chrome extension
+
+1. Extract this ZIP onto your Windows, Mac, or Linux computer.
+2. In desktop Chrome, open chrome://extensions
+3. Enable Developer mode and click Load unpacked.
+4. Select the extracted LogoMute folder.
+5. Click its toolbar icon and choose Help & Instructions — Start Here.
+
+The Watch channels link already opens https://usnewson.com/watch/
+and can be customized under Settings → Channel directory shortcut.
+
+An existing installed LogoMute should be updated by replacing its existing
+extension files in place and clicking Reload in chrome://extensions.
+
+LogoMute starts muted until it verifies a previously saved channel logo,
+so you can press START while an advertisement is playing.
+
+This is an experimental extension for desktop/laptop Google Chrome,
+not a phone application or an official streaming-service product.
+
+Copyright (c) 2026 ContactProject.org — Licensed under Apache-2.0.
+See LICENSE and NOTICE for full terms and attribution.

@@ -1,0 +1,13 @@
+{
+  "name": "logomute",
+  "private": true,
+  "version": "0.10.8",
+  "description": "Experimental desktop Chrome extension for muting TV commercials using on-screen channel logos",
+  "scripts": {
+    "test": "node tests/smoke.js && node tests/audio.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0"
+}
